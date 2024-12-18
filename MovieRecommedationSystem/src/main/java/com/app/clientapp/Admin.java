@@ -163,6 +163,7 @@ public class Admin {
 						break;
 
 					case "5":
+						System.out.println("updating");
 
 						break;
 
