@@ -76,7 +76,7 @@ public class Admin {
 									actress, description, 0);
 
 							System.out.println(adminService.isAddMovie(model)
-									? "***** " + movieName + " is added successfully *****"
+									? "\n***** " + movieName + " is added successfully *****\n"
 									: "===== !!! Movie is not added !!! =====");
 						} else {
 							System.out.println("\n===== !!! Invalid Movie Input !!! =====\n");
@@ -163,8 +163,7 @@ public class Admin {
 						break;
 
 					case "5":
-						System.out.println("updating");
-
+						
 						break;
 
 					case "6":

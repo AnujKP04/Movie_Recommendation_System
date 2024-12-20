@@ -209,17 +209,13 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 
 	}
 
-	static void movieDataHelper() {
-		
-	}
-	@Override
-	public List<MovieModel> getAllMovies() {
+		List<MovieModel> getAllMoviesHelper(String getAllMovieQuery){
+			
 		List<MovieModel> movieData = new ArrayList<>();
 		Set<String> genre;
 		Set<String> lang;
-
 		try {
-			pstmt = conn.prepareStatement("select m.*, y.releaseyear from movies m join movieyear y on m.yearid = y.yearid");
+			pstmt = conn.prepareStatement(getAllMovieQuery);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -264,6 +260,13 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 			return movieData;
 		}
 	}
+	@Override
+	public List<MovieModel> getAllMovies() {
+		String getAllMovieQuery ="select m.*, y.releaseyear from movies m join movieyear y on m.yearid = y.yearid "
+				+ "where m.moviestatus =1 ";
+		List<MovieModel> movieData = this.getAllMoviesHelper(getAllMovieQuery);
+		return movieData;
+	}
 
 	//@Override
 	public List<MovieModel> getMoviesByName(String movieName) {
@@ -302,7 +305,9 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 	
 	//@Override
 	public List<MovieModel> getMoviesByGenre(String movieGenre) {
+		
 		List<MovieModel> moviesList = new ArrayList<>(this.getAllMovies());
+		
 		boolean flag = false;
 		try {
 			
@@ -311,6 +316,7 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 			{
 				MovieModel model = iterator.next();
 				List<String> genres = new ArrayList<>(model.getGenres());
+				flag = false;
 				for(String str:genres)
 				{
 					if(str.equalsIgnoreCase(movieGenre)) {
@@ -483,19 +489,19 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 				return this.getMoviesByName(searchData);
 	
 		case "movieGenre":
-				return this.getMoviesByGenre(searchType);
+				return this.getMoviesByGenre(searchData);
 			
 		case "movieYear":
-				return this.getMoviesByYear(searchType);
+				return this.getMoviesByYear(searchData);
 			
 		case "director":
-				return this.getMoviesByDirector(searchType);
+				return this.getMoviesByDirector(searchData);
 			
 		case "actor":
-				return this.getMoviesByActor(searchType);
+				return this.getMoviesByActor(searchData);
 			
 		case "actress":
-				return this.getMoviesByActress(searchType);
+				return this.getMoviesByActress(searchData);
 				
 		}
 		return null;

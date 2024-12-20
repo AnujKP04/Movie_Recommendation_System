@@ -9,6 +9,11 @@ import com.app.services.AdminServices;
 import com.app.services.AdminServicesImpl;
 
 public class MovieRecommendationSystem {
+	static String userName;
+	static String getUsername() {
+		
+		return userName;
+	}
 
 	public static void main(String[] args) {
 
@@ -38,7 +43,8 @@ public class MovieRecommendationSystem {
 					}
 					else {
 						System.out.println("\n***** Welcome back "+ loginInfo.get(0)+" *****\n");
-						System.out.println("User functinality will be add.......");
+						userName=username;
+						User.userFunctionality();
 					}
 				}
 				else
