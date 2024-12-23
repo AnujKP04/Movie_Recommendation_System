@@ -15,7 +15,7 @@ public class User {
 		UserServices userServices= new UserServicesImpl();
 		String userChoice = null ;
 		do {
-			System.out.println("\n1: Trending Movies\n2: Your Interest\n3:Search Movie\n4: User History\n5: Watchlist\n6: Exit\n"
+			System.out.println("\n1: Trending Movies\n2: Your Interest\n3: Search Movie\n4: User History\n5: Watchlist\n6: Exit\n"
 					+ "Enter your choice");
 			userChoice = sc.nextLine();
 			
@@ -36,7 +36,7 @@ public class User {
 				boolean flag = false;
 				List<MovieModel> selectedMovieData = new ArrayList<>();
 				while(!movieName.equals("0")) {
-					System.out.println("\nSelect movie from trending list: (press 0 for exit)");
+					System.out.println("\nEnter name of movie from trending list: (press 0 for exit)");
 					movieName = sc.nextLine();
 					
 					for(MovieModel m : movieData)
@@ -54,6 +54,7 @@ public class User {
 						SearchMovie.displayMovieHelper(selectedMovieData);
 						
 						MovieOptions.movieOptions(movieName);
+						break;
 					}
 					else {
 						System.out.println("\n===== !!! Invalid Input !!! =====\n");
@@ -67,12 +68,19 @@ public class User {
 				break;
 				
 			case "3":
+				SearchMovie.movieSearchOperation();
 				break;
 				
 			case "4":
+				UserHistory.userHistory();
 				break;
 				
 			case "5":
+				Watchlist.watchListFunctinality();
+				break;
+				
+			case "6":
+				System.out.println("Return to Login Section.....");
 				break;
 				
 			default:

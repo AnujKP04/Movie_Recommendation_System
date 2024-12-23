@@ -31,7 +31,7 @@ public class SearchMovie {
 					System.out.print("\t\t"+str + "\n");
 				}
 				
-				System.out.println("Year: \t\t" + m.getYear()+"\nRating: \t"+m.getRating()+"\n"+"Discription :\n\t"+m.getDescription());
+				System.out.println("Year: \t\t" + m.getYear()+"\nIMDb Rating: \t"+m.getRating()+"\n"+"Discription :\n\t"+m.getDescription());
 				System.out.println("\n=======================================================\n");
 			}
 		} else
@@ -45,8 +45,8 @@ public class SearchMovie {
 		do {
 
 			System.out.println(
-					"1:Search by Name\n2:Search by Genre\n3:Search by Year\n4:Search by Director\n5:Search by Actor\n"
-							+ "6:Search by Actress\n7:Exit\n\nEnter your choice");
+					"1:Search Movie by Name\n2:Search Movie by Genre\n3:Search Movie by Year\n4:Search Movie by Director\n"
+					+ "5:Search Movie by Actor\n6:Search Movie by Actress\n7:Exit\n\nEnter your choice");
 			searchChoice = sc.nextLine();
 			String regex = "[A-Za-z 0-9-]+";
 

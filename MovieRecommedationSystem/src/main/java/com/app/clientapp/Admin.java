@@ -13,7 +13,7 @@ public class Admin {
 		AdminServices adminService = new AdminServicesImpl();
 		String choice;
 		do {
-			System.out.println("1:Movie Section\n2:User Section\nEnter your choice");
+			System.out.println("1:Movie Section\n2:User Section\n3:Exit\nEnter your choice");
 			choice = sc.nextLine();
 			String adminChoice;
 			String regex = "[a-zA-Z0-9 .-]+";
@@ -60,8 +60,11 @@ public class Admin {
 								}
 							}
 						}
+						
 						System.out.println("Enter movie year");
 						String year = sc.nextLine();
+						System.out.println("Enter IMDb rating");
+						String rating = sc.nextLine();
 						System.out.println("Enter movie director name");
 						String director = sc.nextLine();
 						System.out.println("Enter movie actor name");
@@ -73,7 +76,7 @@ public class Admin {
 
 						if (movieName.matches(regex) && duration.matches(regex) && year.matches("[0-9]+")) {
 							model = new MovieModel(movieName, duration, genres, languages, year, director, acter,
-									actress, description, 0);
+									actress, description, rating);
 
 							System.out.println(adminService.isAddMovie(model)
 									? "\n***** " + movieName + " is added successfully *****\n"
@@ -104,7 +107,7 @@ public class Admin {
 									System.out.print("\t\t" + str + "\n");
 								}
 
-								System.out.println("Year: \t\t" + m.getYear() + "\nRating: \t" + m.getRating() + "\n"
+								System.out.println("Year: \t\t" + m.getYear() + "\nIMDb Rating: \t" + m.getRating() + "\n"
 										+ "Discription :\n\t" + m.getDescription());
 								System.out.println("\n=======================================================\n");
 							}

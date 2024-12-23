@@ -21,5 +21,5 @@ public class MovieModel {
 	private String actor;
 	private String actress;
 	private String description;
-	private float rating;
+	private String rating;
 }

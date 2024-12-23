@@ -117,28 +117,23 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 		try {
 
 			/*
-			 * delimiter // create procedure addmoviepro(moviename varchar(100), duration
-			 * varchar(100), myear varchar(100), director varchar(100), actor varchar(100),
-			 * actress varchar(100), moviedescrip text) begin insert ignore into movieyear
-			 * (releaseyear) values (myear); insert into movies (moviename, duration,
-			 * moviedescrip, yearid) values (moviename, duration, moviedescrip, (select
-			 * yearid from movieyear where releaseyear = myear limit 1)); insert into
-			 * moviecast (castname, casttype) select director, 'director' where not exists
-			 * (select 1 from moviecast where castname = director and casttype =
-			 * 'director'); insert into moviecastjoin (movieid, castid) values ((select
-			 * max(movieid) from movies limit 1), (select castid from moviecast where
-			 * castname = director and casttype = 'director')); insert into moviecast
-			 * (castname, casttype) select actor, 'actor' where not exists (select 1 from
-			 * moviecast where castname = actor and casttype = 'actor'); insert into
-			 * moviecastjoin (movieid, castid) values ((select max(movieid) from movies
-			 * limit 1), (select castid from moviecast where castname = actor and casttype =
-			 * 'actor')); insert into moviecast (castname, casttype) select actress,
-			 * 'actress' where not exists (select 1 from moviecast where castname = actress
-			 * and casttype = 'actress'); insert into moviecastjoin (movieid, castid) values
-			 * ((select max(movieid) from movies limit 1), (select castid from moviecast
-			 * where castname = actress and casttype = 'actress')); end //
+			 *create procedure addmoviepro(moviename varchar(100), duration varchar(100), myear varchar(100), director varchar(100),
+			 *actor varchar(100), actress varchar(100), moviedescrip text, rating decimal(3,1)) begin insert ignore into movieyear
+			 *(releaseyear) values (myear); insert into movies (moviename, duration, rating, moviedescrip, yearid) values 
+			 *(moviename, duration, rating, moviedescrip, (select yearid from movieyear where releaseyear = myear limit 1)); 
+			 *insert into moviecast (castname, casttype) select director, 'director' where not exists (select 1 from moviecast 
+			 *where castname = director and casttype = 'director'); insert into moviecastjoin (movieid, castid) values 
+			 *((select max(movieid) from movies limit 1), (select castid from moviecast where castname = director and 
+			 *casttype = 'director')); insert into moviecast (castname, casttype) select actor, 'actor' where not exists 
+			 *(select 1 from moviecast where castname = actor and casttype = 'actor'); 
+			 *insert into moviecastjoin (movieid, castid) values ((select max(movieid) from movies limit 1), 
+			 *(select castid from moviecast where castname = actor and casttype = 'actor')); 
+			 *insert into moviecast (castname, casttype) select actress, 'actress' where not exists 
+			 *(select 1 from moviecast where castname = actress and casttype = 'actress'); 
+			 *insert into moviecastjoin (movieid, castid) values ((select max(movieid) from movies limit 1), 
+			 *(select castid from moviecast where castname = actress and casttype = 'actress')); end;
 			 */
-			pstmt = conn.prepareCall("{call addmoviepro(?,?,?,?,?,?,?)}");
+			pstmt = conn.prepareCall("{call addmoviepro(?,?,?,?,?,?,?,?)}");
 			pstmt.setString(1, model.getMovieName());
 			pstmt.setString(2, model.getDuration());
 			pstmt.setString(3, model.getYear());
@@ -146,6 +141,7 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 			pstmt.setString(5, model.getActor());
 			pstmt.setString(6, model.getActress());
 			pstmt.setString(7, model.getDescription());
+			pstmt.setString(8, model.getRating());
 
 			conn.setAutoCommit(false);
 			int result = pstmt.executeUpdate();
@@ -252,7 +248,7 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 				}
 
 				movieData.add(new MovieModel(rs.getString(2), rs.getString(4), genre, lang, rs.getString(9),
-						castName[0], castName[1], castName[2], rs.getString(5), rs.getFloat(3)));
+						castName[0], castName[1], castName[2], rs.getString(5), rs.getString(3)));
 			}
 			return movieData;
 		} catch (SQLException e) {
