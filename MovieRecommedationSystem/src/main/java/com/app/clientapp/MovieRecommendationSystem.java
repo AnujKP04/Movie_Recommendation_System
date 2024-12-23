@@ -17,6 +17,7 @@ public class MovieRecommendationSystem {
 
 	public static void main(String[] args) {
 
+		System.out.println("main method ");
 		UserModel userModel;
 		AdminServices adminService = new AdminServicesImpl();
 		Scanner sc = ScannerClass.getScanner();
