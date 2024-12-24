@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.app.model.MovieModel;
+import com.app.model.UserModel;
 
 public interface UserRepository {
 
@@ -26,4 +27,15 @@ public interface UserRepository {
 	public boolean isDeleteWatchlist(String username, String movieName);
 	
 	public boolean isDeleteAllWatchlist(String username);
+	
+	public UserModel getProfile(String userName);
+	
+	public boolean isUpdateProfileByName(String newName, String userName);
+	
+	public boolean isUpadateProfileEmail(String newEmail, String userName);
+	
+	public boolean isUpadateProfileContact(String newContact, String userName);
+	
+	public boolean isUpadatePassword(String newPass, String userName);
+	
 }

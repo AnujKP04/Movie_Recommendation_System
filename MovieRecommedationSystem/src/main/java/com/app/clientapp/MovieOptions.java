@@ -14,7 +14,7 @@ public class MovieOptions {
 		String userName = MovieRecommendationSystem.getUsername();
 		do {
 			
-			System.out.println("1: Watch Movie\n2: Add to watchlist\n3: Rate Movie\n4: Exit\n"
+			System.out.println("1: Watch Movie\n2: Add to watchlist\n3: Rate Movie\n4: Exit\n5: Logout\n"
 					+ " Enter your choice");
 			movieOptionsChoice = sc.nextLine();
 			
@@ -42,6 +42,9 @@ public class MovieOptions {
 			case "4":
 				System.out.println("Return to user section");
 				break;
+			case "5":
+				MovieRecommendationSystem.callMain();
+				break;
 				
 			default:
 				System.out.println("\n===== !!! Invalid Input !!! =====\n");
@@ -49,6 +52,6 @@ public class MovieOptions {
 			}
 			
 			
-		}while(!movieOptionsChoice.equals("4"));
+		}while(!movieOptionsChoice.equals("5"));
 	}
 }

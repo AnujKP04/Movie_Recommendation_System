@@ -30,7 +30,7 @@ public class Watchlist {
 
 			String userChoice = "";
 			do {
-				System.out.println("\n1:Delete by name\n2:Clear watchlist\n3:Exit\nEnter your choice");
+				System.out.println("\n1:Delete by name\n2:Clear watchlist\n3:Exit\n4:Logout\nEnter your choice");
 				userChoice = sc.nextLine();
 
 				switch (userChoice) {
@@ -48,6 +48,10 @@ public class Watchlist {
 
 				case "3":
 					System.out.println("Return to user section.....");
+					break;
+					
+				case "4":
+					MovieRecommendationSystem.callMain();
 					break;
 
 				default:

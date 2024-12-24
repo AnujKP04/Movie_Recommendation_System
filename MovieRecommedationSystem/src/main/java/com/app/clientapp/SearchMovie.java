@@ -46,7 +46,7 @@ public class SearchMovie {
 
 			System.out.println(
 					"1:Search Movie by Name\n2:Search Movie by Genre\n3:Search Movie by Year\n4:Search Movie by Director\n"
-					+ "5:Search Movie by Actor\n6:Search Movie by Actress\n7:Exit\n\nEnter your choice");
+					+ "5:Search Movie by Actor\n6:Search Movie by Actress\n7:Exit\n8:Logout\n\nEnter your choice");
 			searchChoice = sc.nextLine();
 			String regex = "[A-Za-z 0-9-]+";
 
@@ -132,7 +132,11 @@ public class SearchMovie {
 			case "7":
 				System.out.println("Return to movie section");
 				break;
-
+				
+			case "8":
+				MovieRecommendationSystem.callMain();
+				break;
+				
 			default:
 				System.out.println("\n===== !!! Invalid Input !!! =====\n");
 				break;

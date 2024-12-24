@@ -15,9 +15,12 @@ public class MovieRecommendationSystem {
 		return userName;
 	}
 
+	public static void  callMain() {
+		String args[]= {};
+		main(args);
+	}
 	public static void main(String[] args) {
 
-		System.out.println("main method ");
 		UserModel userModel;
 		AdminServices adminService = new AdminServicesImpl();
 		Scanner sc = ScannerClass.getScanner();

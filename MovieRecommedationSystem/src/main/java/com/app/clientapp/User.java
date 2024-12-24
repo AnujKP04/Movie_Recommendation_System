@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.app.model.MovieModel;
+import com.app.model.UserModel;
 import com.app.services.UserServices;
 import com.app.services.UserServicesImpl;
 
@@ -15,8 +16,8 @@ public class User {
 		UserServices userServices= new UserServicesImpl();
 		String userChoice = null ;
 		do {
-			System.out.println("\n1: Trending Movies\n2: Your Interest\n3: Search Movie\n4: User History\n5: Watchlist\n6: Exit\n"
-					+ "Enter your choice");
+			System.out.println("\n1: Trending Movies\n2: Your Interest\n3: Search Movie\n4: User History\n5: Watchlist\n6: Profile"
+					+ "\n7: Exit\nEnter your choice");
 			userChoice = sc.nextLine();
 			
 			switch(userChoice) {
@@ -35,10 +36,12 @@ public class User {
 				String movieName= "";
 				boolean flag = false;
 				List<MovieModel> selectedMovieData = new ArrayList<>();
-				while(!movieName.equals("0")) {
+				while(true) {
 					System.out.println("\nEnter name of movie from trending list: (press 0 for exit)");
 					movieName = sc.nextLine();
 					
+					if(movieName.equals("0"))
+						break;
 					for(MovieModel m : movieData)
 					{
 						if(m.getMovieName().equalsIgnoreCase(movieName))
@@ -57,6 +60,7 @@ public class User {
 						break;
 					}
 					else {
+						
 						System.out.println("\n===== !!! Invalid Input !!! =====\n");
 					}
 				}
@@ -80,6 +84,19 @@ public class User {
 				break;
 				
 			case "6":
+				UserModel profile = userServices.getProfile(MovieRecommendationSystem.getUsername());
+				if(profile != null) {
+					System.out.println("\n===== USER PROFILE =====\n");
+					System.out.println("Username: "+profile.getUsername()+"\n\nName: "+profile.getName()+"\nEmail: "+profile.getEmail()
+					+"\nContact: "+profile.getContact()+"\n");
+					
+					UpdateProfile.editProfile(MovieRecommendationSystem.getUsername());
+				}
+				else {
+					System.out.println("\n===== !!! Something went wrong !!! =====\n");
+				}
+				break;
+			case "7":
 				System.out.println("Return to Login Section.....");
 				break;
 				
@@ -88,6 +105,6 @@ public class User {
 				break;
 			}
 			
-		}while(!userChoice.equals("6"));
+		}while(!userChoice.equals("7"));
 	}
 }

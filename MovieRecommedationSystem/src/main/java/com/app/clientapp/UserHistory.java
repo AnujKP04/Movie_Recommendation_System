@@ -32,7 +32,7 @@ public class UserHistory {
 			}
 
 			do {
-				System.out.println("\n1:Delete History By Name\n2:Delete All History\n3:Exit\n\nEnter your choice");
+				System.out.println("\n1:Delete History By Name\n2:Delete All History\n3:Exit\n4:Logout\n\nEnter your choice");
 				historyChoice = sc.nextLine();
 				switch (historyChoice) {
 
@@ -51,7 +51,11 @@ public class UserHistory {
 				case "3":
 					System.out.println("Return to user section.....");
 					break;
-
+					
+				case "4":
+					MovieRecommendationSystem.callMain();
+					break;
+					
 				default:
 					System.out.println("\n===== !!! Invalid Input !!! =====\n");
 					break;

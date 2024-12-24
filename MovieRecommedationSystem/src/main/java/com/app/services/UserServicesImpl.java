@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.app.model.MovieModel;
+import com.app.model.UserModel;
 import com.app.repository.UserRepository;
 import com.app.repository.UserRepositoryImpl;
 
@@ -59,5 +60,30 @@ public class UserServicesImpl implements UserServices {
 	public boolean isDeleteAllWatchlist(String username) {
 		// TODO Auto-generated method stub
 		return userRepo.isDeleteAllWatchlist(username);
+	}
+	@Override
+	public UserModel getProfile(String userName) {
+		// TODO Auto-generated method stub
+		return userRepo.getProfile(userName);
+	}
+	@Override
+	public boolean isUpdateProfileByName(String newName, String userName) {
+		// TODO Auto-generated method stub
+		return userRepo.isUpdateProfileByName(newName, userName);
+	}
+	@Override
+	public boolean isUpadateProfileEmail(String newName, String username) {
+		// TODO Auto-generated method stub
+		return userRepo.isUpadateProfileEmail(newName, username);
+	}
+	@Override
+	public boolean isUpadateProfileContact(String newContact, String userName) {
+		// TODO Auto-generated method stub
+		return userRepo.isUpadateProfileContact(newContact, userName);
+	}
+	@Override
+	public boolean isUpadatePassword(String newPass, String userName) {
+		// TODO Auto-generated method stub
+		return userRepo.isUpadatePassword(newPass, userName);
 	}
 }
