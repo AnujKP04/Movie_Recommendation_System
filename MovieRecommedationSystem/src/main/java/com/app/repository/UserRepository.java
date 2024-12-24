@@ -1,7 +1,6 @@
 package com.app.repository;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import com.app.model.MovieModel;
 import com.app.model.UserModel;
@@ -37,5 +36,9 @@ public interface UserRepository {
 	public boolean isUpadateProfileContact(String newContact, String userName);
 	
 	public boolean isUpadatePassword(String newPass, String userName);
+	
+	public Map<String,Integer> getAllGenres();
+	
+	public  List<String> getMovieGenreByUserHistory(String username);
 	
 }

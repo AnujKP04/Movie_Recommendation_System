@@ -10,7 +10,7 @@ import com.app.services.AdminServicesImpl;
 
 public class MovieRecommendationSystem {
 	static String userName;
-	static String getUsername() {
+	public static String getUsername() {
 		
 		return userName;
 	}

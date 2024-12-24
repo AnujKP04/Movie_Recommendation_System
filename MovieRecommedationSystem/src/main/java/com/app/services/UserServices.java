@@ -37,5 +37,7 @@ public interface UserServices {
 	public boolean isUpadateProfileContact(String newContact, String userName);
 	
 	public boolean isUpadatePassword(String newPass, String userName);
+	
+	public Map<String, Double> recommendedMovie(String username);
 
 }

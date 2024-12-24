@@ -58,6 +58,7 @@ public class SearchMovie {
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName,"movieName"));
 					displayMovieHelper(movieData);
+					MovieOptions.movieOptions(movieName);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Name !!! =====\n");

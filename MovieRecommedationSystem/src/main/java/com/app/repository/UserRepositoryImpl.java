@@ -3,8 +3,10 @@ package com.app.repository;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.app.model.MovieModel;
 import com.app.model.UserModel;
@@ -269,6 +271,48 @@ public class UserRepositoryImpl extends DBConnection implements UserRepository {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	@Override
+	public Map<String,Integer> getAllGenres() {
+		Map<String,Integer> genres = new LinkedHashMap<>();
+		try {
+			
+			pstmt = conn.prepareStatement("Select genrename from genres");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next())
+			{
+				genres.put(rs.getString(1),0);
+			}
+			
+			return genres;
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+			return genres;
+		}
+		
+	}
+
+	@Override
+	public List<String> getMovieGenreByUserHistory(String username) {
+		 List<String> userHistoryGenres = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(" select g.genrename from genres g join moviegenrejoin mgj on g.genreid = mgj.genreid "
+					+ "join movies m on m.movieid = mgj.movieid join userhistory h on h.movieid = m.movieid "
+					+ "join user u on u.userid = h.userid where u.username = ?;");
+			pstmt.setString(1, username);
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				userHistoryGenres.add(rs.getString(1));
+			}
+			return userHistoryGenres;
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return userHistoryGenres;
 		}
 	}
 }

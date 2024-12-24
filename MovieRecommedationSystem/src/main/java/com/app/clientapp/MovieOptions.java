@@ -52,6 +52,6 @@ public class MovieOptions {
 			}
 			
 			
-		}while(!movieOptionsChoice.equals("5"));
+		}while(!movieOptionsChoice.equals("4"));
 	}
 }

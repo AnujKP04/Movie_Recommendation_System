@@ -86,4 +86,9 @@ public class UserServicesImpl implements UserServices {
 		// TODO Auto-generated method stub
 		return userRepo.isUpadatePassword(newPass, userName);
 	}
+	@Override
+	public Map<String, Double> recommendedMovie(String username) {
+		// TODO Auto-generated method stub
+		return CollaborativeFilteringMRSAlgo.mvoieRecommendationAlgo(username);
+	}
 }
