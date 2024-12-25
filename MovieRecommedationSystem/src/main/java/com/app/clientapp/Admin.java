@@ -38,7 +38,7 @@ public class Admin {
 							if (genre.equals("0")) {
 								break;
 							} else {
-								if (genre.matches("[a-zA-Z]+")) {
+								if (genre.matches("[a-zA-Z -]+")) {
 									genres.add(genre);
 								} else {
 									System.out.println("\n===== !!! Invalid Genre !!! =====\n");
@@ -79,7 +79,7 @@ public class Admin {
 									actress, description, rating);
 
 							System.out.println(adminService.isAddMovie(model)
-									? "\n***** " + movieName + " is added successfully *****\n"
+									? "\n***** " + movieName + " movie is added successfully *****\n"
 									: "===== !!! Movie is not added !!! =====");
 						} else {
 							System.out.println("\n===== !!! Invalid Movie Input !!! =====\n");
@@ -186,7 +186,7 @@ public class Admin {
 				break;
 
 			case "2":
-
+				UserSectionForAdmin.userSection();
 				break;
 
 			case "3":

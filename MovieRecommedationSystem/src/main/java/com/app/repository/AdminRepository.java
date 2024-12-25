@@ -34,4 +34,12 @@ public interface AdminRepository {
 	public List<MovieModel> getMoviesBySearch(String searchData, String searchType);
 	
 	public boolean isDeleteMovie(String movieName, String movieYear);
+	
+	public List<UserModel> getAllUserData();
+	
+	public boolean isBlockedUser(String username);
+	
+	public List<UserModel> getAllBlockedUser();
+	
+	public boolean isUnblockUser(String username);
 }

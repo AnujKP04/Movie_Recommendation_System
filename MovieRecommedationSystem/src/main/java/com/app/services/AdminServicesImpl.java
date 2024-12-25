@@ -83,5 +83,24 @@ public class AdminServicesImpl implements AdminServices {
 		// TODO Auto-generated method stub
 		return adminRepo.isDeleteMovie(movieName, movieYear);
 	}
-	
+	@Override
+	public List<UserModel> getAllUserData() {
+		// TODO Auto-generated method stub
+		return adminRepo.getAllUserData();
+	}
+	@Override
+	public boolean isBlockedUser(String username) {
+		// TODO Auto-generated method stub
+		return adminRepo.isBlockedUser(username);
+	}
+	@Override
+	public List<UserModel> getAllBlockedUser() {
+		// TODO Auto-generated method stub
+		return adminRepo.getAllBlockedUser();
+	}
+	@Override
+	public boolean isUnblockUser(String username) {
+		// TODO Auto-generated method stub
+		return adminRepo.isUnblockUser(username);
+	}
 }

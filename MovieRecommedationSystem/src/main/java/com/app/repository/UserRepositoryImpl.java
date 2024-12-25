@@ -209,7 +209,7 @@ public class UserRepositoryImpl extends DBConnection implements UserRepository {
 
 			while (rs.next()) {
 				profile = new UserModel(rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getString(9));
+						rs.getString(6),"", rs.getString(9));
 			}
 			return profile;
 		} catch (SQLException e) {

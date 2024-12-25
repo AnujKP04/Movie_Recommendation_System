@@ -520,8 +520,65 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 		{
 			e.printStackTrace();
 			return false;
-		}
-		
+		}	
 	}
 
+	public List<UserModel> getAllUserDataHelper(String query)
+	{
+		List<UserModel> userData = new ArrayList<>();
+		try
+		{
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next())
+			{
+				userData.add(new UserModel(rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),"",rs.getString(7),
+						rs.getString(9)));
+			}
+			return userData;
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+			return userData;
+		}
+	}
+	
+	@Override
+	public List<UserModel> getAllUserData() {
+		String query ="select * from user where usertype != 'Admin' and userstatus = 1";
+		return getAllUserDataHelper(query);
+	}
+
+	@Override
+	public boolean isBlockedUser(String username) {
+		try {
+			pstmt = conn.prepareStatement("update user set userstatus = 0 where username = ?");
+			pstmt.setString(1, username);
+			int result = pstmt.executeUpdate();
+			return result==1?true:false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
+	@Override
+	public List<UserModel> getAllBlockedUser() {
+		String query ="select * from user where usertype != 'Admin' and userstatus = 0";
+		return getAllUserDataHelper(query);
+	}
+
+	@Override
+	public boolean isUnblockUser(String username) {
+		try {
+			pstmt = conn.prepareStatement("update user set userstatus = 1 where username = ?");
+			pstmt.setString(1, username);
+			int result = pstmt.executeUpdate();
+			return result==1?true:false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

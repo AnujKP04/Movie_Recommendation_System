@@ -129,7 +129,7 @@ public class MovieRecommendationSystem {
 						case "1":
 							System.out.println("\nEnter security code");
 							if (sc.nextLine().equals("1234")) {
-								userModel = new UserModel(name,email,contact,username,password,"Admin");
+								userModel = new UserModel(name,email,contact,username,password,"","Admin");
 								System.out.println(adminService.isRegister(userModel)?"Admin Registered Successfully":
 									"Admin Registeration Failed");
 							} else {
@@ -137,7 +137,7 @@ public class MovieRecommendationSystem {
 										"\n===== !!! Wrong Security Code !!! =====\n Enter again security code");
 								if (sc.nextLine().equals("1234")) {
 
-									userModel = new UserModel(name,email,contact,username,password,"Admin");
+									userModel = new UserModel(name,email,contact,username,password,"","Admin");
 									System.out.println(adminService.isRegister(userModel)?"Admin Registered Successfully":
 											"Admin Registeration Failed");
 								} else {
@@ -147,7 +147,7 @@ public class MovieRecommendationSystem {
 							break;
 
 						case "2":
-							userModel = new UserModel(name,email,contact,username,password,"User");
+							userModel = new UserModel(name,email,contact,username,password,"","User");
 							System.out.println(adminService.isRegister(userModel)?"User Registered Successfully":
 									"User Registeration Failed");
 							break;
@@ -170,7 +170,5 @@ public class MovieRecommendationSystem {
 				break;
 			}
 		} while (!choice.equals("3"));
-
 	}
-
 }

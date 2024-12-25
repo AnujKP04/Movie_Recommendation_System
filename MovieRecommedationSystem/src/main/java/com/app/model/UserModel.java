@@ -13,5 +13,6 @@ public class UserModel {
 	private String contact;
 	private String username;
 	private String password;
+	private String date;
 	private String type;
 }

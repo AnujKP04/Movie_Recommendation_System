@@ -50,8 +50,6 @@ public class MovieOptions {
 				System.out.println("\n===== !!! Invalid Input !!! =====\n");
 				break;
 			}
-			
-			
 		}while(!movieOptionsChoice.equals("4"));
 	}
 }

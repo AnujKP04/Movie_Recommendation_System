@@ -99,7 +99,7 @@ public class User {
 					
 					System.out.println("\nEnter movie name (press 0 for exit)");
 					movieName = sc.nextLine();
-					if(movieName.equals("0") && movieName.equals("4"))
+					if(movieName.equals("0"))
 					{
 						break;
 					}
