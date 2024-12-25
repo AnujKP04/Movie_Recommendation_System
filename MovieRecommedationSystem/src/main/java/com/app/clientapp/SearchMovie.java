@@ -18,7 +18,7 @@ public class SearchMovie {
 
 		if (!movieData.isEmpty()) {
 			for (MovieModel m : movieData) {
-				System.out.println("Name: \t\t" + m.getMovieName() + "\nDirector: \t" + m.getDirector() + "\nActor: \t\t"
+				System.out.println("\nName: \t\t" + m.getMovieName() + "\nDirector: \t" + m.getDirector() + "\nActor: \t\t"
 						+ m.getActor() + "\nActress: \t" + m.getActress() + "\nGenres: \t");
 				genre = m.getGenres();
 				for (String str : genre) {

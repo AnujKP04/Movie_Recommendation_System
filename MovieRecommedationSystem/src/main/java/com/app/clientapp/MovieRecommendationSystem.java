@@ -43,6 +43,7 @@ public class MovieRecommendationSystem {
 					if(loginInfo.get(1).equals("Admin")) 
 					{
 						System.out.println("\n***** Welcome back "+ loginInfo.get(0)+" *****\n");
+						userName=username;
 						Admin.AdminFunctinality();
 					}
 					else {

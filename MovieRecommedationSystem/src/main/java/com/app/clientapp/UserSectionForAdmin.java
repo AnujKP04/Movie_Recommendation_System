@@ -27,37 +27,49 @@ public class UserSectionForAdmin {
 	{
 		Scanner sc = ScannerClass.getScanner();
 		AdminServices adminService = new AdminServicesImpl();
-		String choice="";
-		
+		String choice="";		
 		do {
-			System.out.println("\n***** All Users *****\n");
-			List<UserModel> userData = new ArrayList<>(adminService.getAllUserData());
-			getUserDataHelper(userData);
-			System.out.println("\n1:Block User\n2:Unblock User\n3:Exit\n4:Logout");
+			System.out.println("\n1:Show All Users\n2:Block User\n3:Unblock User\n4:Exit\n5:Logout");
 			choice = sc.nextLine();
 			
 			switch(choice)
 			{
 			case "1":
-				System.out.println("Enter username from user list");
+				System.out.println("\n\t\t\t\t********** All Users **********\n");
+				List<UserModel> userData = new ArrayList<>(adminService.getAllUserData());
+				getUserDataHelper(userData);
+				break;
+				
+			case "2":
+				System.out.println("\n\t\t\t\t********** All Users **********\n");
+				getUserDataHelper(adminService.getAllUserData());
+				System.out.println("\nEnter username from user list");
 				String username = sc.nextLine();
 				System.out.println(adminService.isBlockedUser(username)?"\n*** User Blocked Successfully ***\n":
 					"\n===== !!! Something went wrong !!! =====\n");
 				break;
 				
-			case "2":
-				System.out.println("\n***** All Blocked User *****\n");
-				getUserDataHelper(adminService.getAllBlockedUser());
-				System.out.println("Enter username");
-				username = sc.nextLine(); 
-				System.out.println(adminService.isUnblockUser(username)?"\n*** User Unblocked Successfully ***\n":
-					"\n===== !!! Something went wrong !!! =====\n"); 
-				break;
-				
 			case "3":
+				List<UserModel> blockedUser = new ArrayList<>(adminService.getAllBlockedUser());
+				if(!blockedUser.isEmpty())
+				{
+					System.out.println("\n\t\t\t********** All Blocked Users **********\n");
+					getUserDataHelper(blockedUser);
+					System.out.println("\nEnter username to unblock");
+					username = sc.nextLine(); 
+					System.out.println(adminService.isUnblockUser(username)?"\n*** User Unblocked Successfully ***\n":
+						"\n===== !!! Something went wrong !!! =====\n"); 
+				}
+				else {
+					System.out.println("\n===== !!! Blacklist is Empty !!! =====\n");
+				}
+				
 				break;
 				
 			case "4":
+				break;
+				
+			case "5":
 				MovieRecommendationSystem.callMain();
 				break;
 				
@@ -66,6 +78,6 @@ public class UserSectionForAdmin {
 				break;
 			}
 			
-		}while(!choice.equals("3"));
+		}while(!choice.equals("4"));
 	}
 }

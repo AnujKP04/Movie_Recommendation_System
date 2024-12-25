@@ -13,7 +13,7 @@ public class Admin {
 		AdminServices adminService = new AdminServicesImpl();
 		String choice;
 		do {
-			System.out.println("1:Movie Section\n2:User Section\n3:Exit\nEnter your choice");
+			System.out.println("1:Movie Section\n2:User Section\n3:Profile\n4:Logout\nEnter your choice");
 			choice = sc.nextLine();
 			String adminChoice;
 			String regex = "[a-zA-Z0-9 .-]+";
@@ -188,8 +188,12 @@ public class Admin {
 			case "2":
 				UserSectionForAdmin.userSection();
 				break;
-
+				
 			case "3":
+				User.showProfile();
+				break;
+
+			case "4":
 				System.out.println("Return to login page......\n");
 				break;
 
@@ -197,6 +201,6 @@ public class Admin {
 				System.out.println("\n===== !!! Invalid Input !!! =====\n");
 				break;
 			}
-		} while (!choice.equals("3"));
+		} while (!choice.equals("4"));
 	}
 }

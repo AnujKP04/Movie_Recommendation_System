@@ -35,7 +35,7 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 		List<String> loginInfo = new ArrayList<String>();
 		try
 		{
-			pstmt = conn.prepareStatement("select name,usertype from user where username = ? and password = ?");
+			pstmt = conn.prepareStatement("select name,usertype from user where username = ? and password = ? and userstatus = 1");
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
 

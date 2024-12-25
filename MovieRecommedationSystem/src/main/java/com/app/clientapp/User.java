@@ -15,6 +15,21 @@ import com.app.services.UserServicesImpl;
 
 public class User {
 
+	static void showProfile()
+	{
+		UserServices userServices = new UserServicesImpl();
+		
+		UserModel profile = userServices.getProfile(MovieRecommendationSystem.getUsername());// username as parameter
+		if (profile != null) {
+			System.out.println("\n===== YOUR PROFILE =====\n");
+			System.out.println("Username: " + profile.getUsername() + "\n\nName: " + profile.getName()
+					+ "\nEmail: " + profile.getEmail() + "\nContact: " + profile.getContact() + "\n");
+
+			UpdateProfile.editProfile(MovieRecommendationSystem.getUsername());
+		} else {
+			System.out.println("\n===== !!! Something went wrong !!! =====\n");
+		}
+	}
 	static void userFunctionality() {
 		Scanner sc = ScannerClass.getScanner();
 		UserServices userServices = new UserServicesImpl();
@@ -22,15 +37,41 @@ public class User {
 		String userChoice = null;
 		do {
 			System.out.println(
-					"\n1: Trending Movies\n2: Your Interest\n3: Search Movie\n4: User History\n5: Watchlist\n6: Profile"
-							+ "\n7: Exit\nEnter your choice");
+					"\n1: Show All Movies\n2: Trending Movies\n3: Your Interest\n4: Search Movie\n5: User History\n6: Watchlist"
+							+ "\n7: Profile\n8: Exit\nEnter your choice");
 			userChoice = sc.nextLine();
 
 			switch (userChoice) {
 			case "1":
-				List<MovieModel> movieData = new ArrayList<>(userServices.getTrendingMovies());
-
 				int count = 1;
+				String movieName="";
+				List<MovieModel> movieData = new ArrayList<>(adminService.getAllMovies());
+				if (!movieData.isEmpty()) {
+					System.out.println("\n  ***** All Movies List *****\n");
+					for (MovieModel model : movieData) {
+						System.out.println("\t" + count++ + ".  " + model.getMovieName());
+					}
+
+					while(true) {
+						System.out.println("\nEnter movie name (Press 0 to exit) ");
+						movieName = sc.nextLine();
+						if(movieName.equals("0"))
+						{
+							break;
+						}
+						movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
+						SearchMovie.displayMovieHelper(movieData);
+						MovieOptions.movieOptions(movieName);
+					}
+					
+				} else {
+					System.out.println("\n===== !!! No Movie Available !!! =====\n");
+				}
+				break;
+			case "2":
+				movieData = new ArrayList<>(userServices.getTrendingMovies());
+
+				count = 1;
 				System.out.println("\n***** Top 10 Trending Movies *****\n");
 				for (MovieModel m : movieData) {
 					System.out.println(count++ + ". " + m.getMovieName());
@@ -38,7 +79,7 @@ public class User {
 
 				System.out.println("___________________________________");
 
-				String movieName = "";
+				movieName = "";
 				boolean flag = false;
 				List<MovieModel> selectedMovieData = new ArrayList<>();
 				while (true) {
@@ -69,72 +110,63 @@ public class User {
 
 				break;
 
-			case "2":
+			case "3":
 				Map<String, Double> userInterestMovie = new LinkedHashMap<>(
 						userServices.recommendedMovie(MovieRecommendationSystem.getUsername()));
-				count= 1;
+				count = 1;
 				String more = "";
 				System.out.println("\n***** MOVIES MAY YOU LIKE *****\n");
 				System.out.println("\tId  MovieName\n________________________________");
-				for(Map.Entry<String, Double> map : userInterestMovie.entrySet()) {
-					
-					if(count < 11 ) {
-						System.out.println("\t"+ count++ +".  "+map.getKey());
-					}
-					else if(count == 11) {
+				for (Map.Entry<String, Double> map : userInterestMovie.entrySet()) {
+
+					if (count < 11) {
+						// System.out.print("\t"+map.getValue());
+						System.out.println("\t" + count++ + ".  " + map.getKey());
+
+					} else if (count == 11) {
 						System.out.println("\n\tNext --> (Press (Y/N) to show more...)");
 						more = sc.nextLine();
 					}
-					
-					if(more.equalsIgnoreCase("n") && count == 11)
+
+					if (more.equalsIgnoreCase("n") && count == 11)
 						break;
-					if(more.equalsIgnoreCase("y"))
-					{
-						System.out.println("\t"+ count++ +".  "+map.getKey());
+					if (more.equalsIgnoreCase("y")) {
+						// System.out.print("\t"+map.getValue());
+						System.out.println("\t" + count++ + ".  " + map.getKey());
 					}
-					
 				}
-				
-				while(true) {
-					
+
+				while (true) {
+
 					System.out.println("\nEnter movie name (press 0 for exit)");
 					movieName = sc.nextLine();
-					if(movieName.equals("0"))
-					{
+					if (movieName.equals("0")) {
 						break;
 					}
-					List<MovieModel> recommendedMovieData = new ArrayList<>(adminService.getMoviesBySearch(movieName,"movieName"));
+					List<MovieModel> recommendedMovieData = new ArrayList<>(
+							adminService.getMoviesBySearch(movieName, "movieName"));
 					SearchMovie.displayMovieHelper(recommendedMovieData);
 					MovieOptions.movieOptions(movieName);
 				}
-		
-				break;
 
-			case "3":
-				SearchMovie.movieSearchOperation();
 				break;
 
 			case "4":
-				UserHistory.userHistory();
+				SearchMovie.movieSearchOperation();
 				break;
 
 			case "5":
-				Watchlist.watchListFunctinality();
+				UserHistory.userHistory();
 				break;
 
 			case "6":
-				UserModel profile = userServices.getProfile(MovieRecommendationSystem.getUsername());
-				if (profile != null) {
-					System.out.println("\n===== USER PROFILE =====\n");
-					System.out.println("Username: " + profile.getUsername() + "\n\nName: " + profile.getName()
-							+ "\nEmail: " + profile.getEmail() + "\nContact: " + profile.getContact() + "\n");
-
-					UpdateProfile.editProfile(MovieRecommendationSystem.getUsername());
-				} else {
-					System.out.println("\n===== !!! Something went wrong !!! =====\n");
-				}
+				Watchlist.watchListFunctinality();
 				break;
+
 			case "7":
+				showProfile();
+				break;
+			case "8":
 				System.out.println("Return to Login Section.....");
 				break;
 
@@ -143,6 +175,6 @@ public class User {
 				break;
 			}
 
-		} while (!userChoice.equals("7"));
+		} while (!userChoice.equals("8"));
 	}
 }
