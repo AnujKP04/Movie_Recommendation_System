@@ -21,6 +21,7 @@ public class MovieRecommendationSystem {
 	}
 	public static void main(String[] args) {
 
+		System.out.println("Try to pull from dell");
 		UserModel userModel;
 		AdminServices adminService = new AdminServicesImpl();
 		Scanner sc = ScannerClass.getScanner();
