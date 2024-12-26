@@ -8,6 +8,7 @@ import com.app.model.UserModel;
 
 public class AdminServicesImpl implements AdminServices {
 	AdminRepository adminRepo = new AdminRepositoryImpl();
+	AdminMovieUpdateRepository movieRepo = new AdminMovieUpdateRepositoryImpl();
 	
 	@Override
 	public boolean isRegister(UserModel userModel) {
@@ -102,5 +103,10 @@ public class AdminServicesImpl implements AdminServices {
 	public boolean isUnblockUser(String username) {
 		// TODO Auto-generated method stub
 		return adminRepo.isUnblockUser(username);
+	}
+	@Override
+	public boolean isUpdateMovie(String movieName, String newMovieData, String movieDataType) {
+		// TODO Auto-generated method stub
+		return movieRepo.isUpdateMovie(movieName, newMovieData, movieDataType);
 	}
 }

@@ -14,7 +14,7 @@ import com.app.services.UserServices;
 import com.app.services.UserServicesImpl;
 
 public class User {
-
+	static Scanner sc = ScannerClass.getScanner();
 	static void showProfile()
 	{
 		UserServices userServices = new UserServicesImpl();
@@ -30,8 +30,36 @@ public class User {
 			System.out.println("\n===== !!! Something went wrong !!! =====\n");
 		}
 	}
+	
+	static void displayMoviesList() {
+		AdminServices adminService = new AdminServicesImpl();
+		int count = 1;
+		String movieName="";
+		List<MovieModel> movieData = new ArrayList<>(adminService.getAllMovies());
+		if (!movieData.isEmpty()) {
+			System.out.println("\n  ***** All Movies List *****\n");
+			for (MovieModel model : movieData) {
+				System.out.println("\t" + count++ + ".  " + model.getMovieName());
+			}
+
+			while(true) {
+				System.out.println("\nEnter movie name (Press 0 to exit) ");
+				movieName = sc.nextLine();
+				if(movieName.equals("0"))
+				{
+					break;
+				}
+				movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
+				SearchMovie.displayMovieHelper(movieData);
+				MovieOptions.movieOptions(movieName); // resolve this part====================================
+			}
+			
+		} else {
+			System.out.println("\n===== !!! No Movie Available !!! =====\n");
+		}
+	}
 	static void userFunctionality() {
-		Scanner sc = ScannerClass.getScanner();
+		
 		UserServices userServices = new UserServicesImpl();
 		AdminServices adminService = new AdminServicesImpl();
 		String userChoice = null;
@@ -43,35 +71,12 @@ public class User {
 
 			switch (userChoice) {
 			case "1":
-				int count = 1;
-				String movieName="";
-				List<MovieModel> movieData = new ArrayList<>(adminService.getAllMovies());
-				if (!movieData.isEmpty()) {
-					System.out.println("\n  ***** All Movies List *****\n");
-					for (MovieModel model : movieData) {
-						System.out.println("\t" + count++ + ".  " + model.getMovieName());
-					}
-
-					while(true) {
-						System.out.println("\nEnter movie name (Press 0 to exit) ");
-						movieName = sc.nextLine();
-						if(movieName.equals("0"))
-						{
-							break;
-						}
-						movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
-						SearchMovie.displayMovieHelper(movieData);
-						MovieOptions.movieOptions(movieName);
-					}
-					
-				} else {
-					System.out.println("\n===== !!! No Movie Available !!! =====\n");
-				}
+				displayMoviesList();
 				break;
 			case "2":
-				movieData = new ArrayList<>(userServices.getTrendingMovies());
+				List<MovieModel>movieData = new ArrayList<>(userServices.getTrendingMovies());
 
-				count = 1;
+				int count = 1;
 				System.out.println("\n***** Top 10 Trending Movies *****\n");
 				for (MovieModel m : movieData) {
 					System.out.println(count++ + ". " + m.getMovieName());
@@ -79,7 +84,7 @@ public class User {
 
 				System.out.println("___________________________________");
 
-				movieName = "";
+				String movieName = "";
 				boolean flag = false;
 				List<MovieModel> selectedMovieData = new ArrayList<>();
 				while (true) {

@@ -21,7 +21,7 @@ public class Admin {
 			case "1":
 				do {
 					System.out.println(
-							"1:Add movie\n2:View all movies\n3:Search movie\n4:Delete movie\n5:Update movie\n6:View all users\n7:Exit"
+							"1:Add movie\n2:View all movies\n3:Search movie\n4:Delete movie\n5:Update movie\n6:Exit"
 									+ "\n\nEnter your choice");
 					adminChoice = sc.nextLine();
 
@@ -60,7 +60,7 @@ public class Admin {
 								}
 							}
 						}
-						
+
 						System.out.println("Enter movie year");
 						String year = sc.nextLine();
 						System.out.println("Enter IMDb rating");
@@ -107,8 +107,8 @@ public class Admin {
 									System.out.print("\t\t" + str + "\n");
 								}
 
-								System.out.println("Year: \t\t" + m.getYear() + "\nIMDb Rating: \t" + m.getRating() + "\n"
-										+ "Discription :\n\t" + m.getDescription());
+								System.out.println("Year: \t\t" + m.getYear() + "\nIMDb Rating: \t" + m.getRating()
+										+ "\n" + "Discription :\n\t" + m.getDescription());
 								System.out.println("\n=======================================================\n");
 							}
 						} else
@@ -123,42 +123,41 @@ public class Admin {
 					case "4":
 						System.out.println("\nEnter movie name ");
 						movieName = sc.nextLine();
-						String movieYear ="";
+						String movieYear = "";
 						boolean flag = false;
 						if (movieName.matches(regex)) {
 							movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
 							SearchMovie.displayMovieHelper(movieData);
-							if (movieData.size() > 1) {
-								System.out.println("\nEnter movie year ");
-								movieYear = sc.nextLine();
-								if (movieYear.matches("[0-9]{4}")) {
-									System.out.println(adminService.isDeleteMovie(movieName, movieYear)
-											? "***** " + movieName + " is deleted successfully *****\n"
-											: "===== !!! Failed to delete !!! =====\n");
+							if (!movieData.isEmpty()) {
+								if (movieData.size() > 1) {
+									System.out.println("\nEnter movie year ");
+									movieYear = sc.nextLine();
+									if (movieYear.matches("[0-9]{4}")) {
+										System.out.println(adminService.isDeleteMovie(movieName, movieYear)
+												? "***** " + movieName + " is deleted successfully *****\n"
+												: "===== !!! Failed to delete !!! =====\n");
+									} else {
+										System.out.println("\n===== !!! Invalid Movie Year !!! =====\n");
+									}
+
 								} else {
-									System.out.println("\n===== !!! Invalid Movie Year !!! =====\n");
-								}
-								
-							}
-							else {
-								for(MovieModel mModel :movieData ) {
-									if(mModel.getMovieName().equalsIgnoreCase(movieName))
-									{
-										movieYear =mModel.getYear();
-										flag = true;
-										break;
+									for (MovieModel mModel : movieData) {
+										if (mModel.getMovieName().equalsIgnoreCase(movieName)) {
+											movieYear = mModel.getYear();
+											flag = true;
+											break;
+										}
+									}
+									if (flag) {
+										System.out.println(adminService.isDeleteMovie(movieName, movieYear)
+												? "***** " + movieName + " movie is deleted successfully *****\n"
+												: "===== !!! Failed to delete !!! =====\n");
+									} else {
+										System.out.println("\n===== !!! Failed  !!! =====\n");
 									}
 								}
-								if(flag) {
-									System.out.println(adminService.isDeleteMovie(movieName, movieYear)
-											? "***** " + movieName + " movie is deleted successfully *****\n"
-											: "===== !!! Failed to delete !!! =====\n");
-								}
-								else {
-									System.out.println("\n===== !!! Failed  !!! =====\n");
-								}
-								
 							}
+
 						} else {
 							System.out.println("\n===== !!! Invalid Movie Name !!! =====\n");
 						}
@@ -166,14 +165,10 @@ public class Admin {
 						break;
 
 					case "5":
-						
+						UpdateMovie.updateMovie();
 						break;
 
 					case "6":
-
-						break;
-
-					case "7":
 						System.out.println("Return to main page......\n");
 						break;
 
@@ -182,13 +177,13 @@ public class Admin {
 						break;
 					}
 
-				} while (!adminChoice.equals("7"));
+				} while (!adminChoice.equals("6"));
 				break;
 
 			case "2":
 				UserSectionForAdmin.userSection();
 				break;
-				
+
 			case "3":
 				User.showProfile();
 				break;
