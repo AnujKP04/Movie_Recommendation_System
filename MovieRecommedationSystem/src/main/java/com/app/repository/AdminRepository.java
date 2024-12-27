@@ -42,4 +42,8 @@ public interface AdminRepository {
 	public List<UserModel> getAllBlockedUser();
 	
 	public boolean isUnblockUser(String username);
+	
+	public List<String> getBlockedMovie();
+	
+	public boolean isUnblockMovie(String MovieName);
 }

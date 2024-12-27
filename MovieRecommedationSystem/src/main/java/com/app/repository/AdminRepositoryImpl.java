@@ -325,15 +325,7 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 					iterator.remove();
 				}
 			}
-			if(flag)
-			{
-				return moviesList;
-			}
-			else {
-				moviesList.clear();
-				return moviesList;
-			}
-			
+			return moviesList;
 		}
 		catch(Exception e)
 		{
@@ -346,7 +338,6 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 	//@Override
 	public List<MovieModel> getMoviesByYear(String movieYear) {
 		List<MovieModel> moviesList = new ArrayList<>(this.getAllMovies());
-		boolean flag = false;
 		try {
 			
 			Iterator<MovieModel> iterator = moviesList.iterator();
@@ -355,17 +346,9 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 				MovieModel model = iterator.next();
 				if(!model.getYear().equalsIgnoreCase(movieYear)) {
 					iterator.remove();
-					flag = true;
 				}
 			}
-			if(flag)
-			{
-				return moviesList;
-			}
-			else {
-				moviesList.clear();
-				return moviesList;
-			}
+			return moviesList;
 			
 		}
 		catch(Exception e)
@@ -580,5 +563,37 @@ public class AdminRepositoryImpl extends DBConnection implements AdminRepository
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public List<String> getBlockedMovie() {
+		List<String> blockedMovies = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement("select moviename from movies where moviestatus = 0");
+			rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+				blockedMovies.add(rs.getString(1));
+			}
+			return blockedMovies;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return blockedMovies;
+		}
+	}
+
+	@Override
+	public boolean isUnblockMovie(String MovieName) {
+		try {
+			pstmt = conn.prepareStatement("update movies set moviestatus = 1 where moviename = ? ");
+			pstmt.setString(1, MovieName);
+			
+			int result = pstmt.executeUpdate();
+			return result >= 1?true:false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 }

@@ -51,7 +51,8 @@ public class User {
 				}
 				movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
 				SearchMovie.displayMovieHelper(movieData);
-				MovieOptions.movieOptions(movieName); // resolve this part====================================
+				if(!movieData.isEmpty())
+				MovieOptions.movieOptions(movieName); 
 			}
 			
 		} else {

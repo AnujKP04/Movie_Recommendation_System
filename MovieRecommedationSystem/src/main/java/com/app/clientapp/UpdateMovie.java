@@ -43,6 +43,7 @@ public class UpdateMovie {
 			{
 				System.out.println("\nEnter New Movie "+ title);
 				String newMovieData = sc.nextLine();
+				
 				if(adminService.isUpdateMovie(movieName, newMovieData, movieDataType))
 				{
 					System.out.println("\n***** Movie Updated Successfully *****\n"); 
@@ -91,7 +92,34 @@ public class UpdateMovie {
 				break;
 						
 			case "2":
-				movieUpdateOperationHelper("movieYear","Year");
+				displayMoviesList();
+				if(flag) {
+					System.out.println("\nEnter Movie Name");
+					String movieName = sc.nextLine();
+					List<MovieModel>movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
+					SearchMovie.displayMovieHelper(movieData);
+					if(!movieData.isEmpty())
+					{
+						System.out.println("\nEnter New Movie Year");
+						String newMovieData = sc.nextLine();
+						if(newMovieData.length()==4)
+						{
+							if(adminService.isUpdateMovie(movieName, newMovieData, "movieYear"))
+							{
+								System.out.println("\n***** Movie Updated Successfully *****\n"); 
+								movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
+								SearchMovie.displayMovieHelper(movieData);
+							}
+							else {
+								System.out.println("\n=====!!! Something Went Wrong !!!=====\n");
+							}
+						}
+						else
+						{
+							System.out.println("\n=====!!! Invalid Movie Year !!!=====\n");
+						}
+					}
+				}
 				break;
 				
 			case "3":
@@ -99,7 +127,35 @@ public class UpdateMovie {
 				break;
 				
 			case "4":
-				movieUpdateOperationHelper("movieRating","IMDb rating");
+				displayMoviesList();
+				if(flag) {
+					System.out.println("\nEnter Movie Name");
+					String movieName = sc.nextLine();
+					List<MovieModel>movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
+					SearchMovie.displayMovieHelper(movieData);
+					if(!movieData.isEmpty())
+					{
+						System.out.println("\nEnter New IMDb Movie Rating");
+						String newMovieData = sc.nextLine();
+						double rating = Double.parseDouble(newMovieData);
+						if(rating <= 10 && rating > 0)
+						{
+							if(adminService.isUpdateMovie(movieName, newMovieData, "movieRating"))
+							{
+								System.out.println("\n***** Movie Updated Successfully *****\n"); 
+								movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
+								SearchMovie.displayMovieHelper(movieData);
+							}
+							else {
+								System.out.println("\n=====!!! Something Went Wrong !!!=====\n");
+							}
+						}
+						else
+						{
+							System.out.println("\n=====!!! Rating should be out of 10 !!!=====\n");
+						}
+					}
+				}
 				break;
 				
 			case "5":

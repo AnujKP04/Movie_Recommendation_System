@@ -91,4 +91,9 @@ public class UserServicesImpl implements UserServices {
 		// TODO Auto-generated method stub
 		return CollaborativeFilteringMRSAlgo.mvoieRecommendationAlgo(username);
 	}
+	@Override
+	public Map<String, Integer> getAllGenres() {
+		// TODO Auto-generated method stub
+		return userRepo.getAllGenres();
+	}
 }

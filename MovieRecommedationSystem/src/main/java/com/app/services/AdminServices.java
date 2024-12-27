@@ -46,4 +46,8 @@ public interface AdminServices {
 	public boolean isUnblockUser(String username);
 	
 	public boolean isUpdateMovie(String movieName, String newMovieData, String movieDataType);
+	
+	public List<String> getBlockedMovie();
+	
+	public boolean isUnblockMovie(String MovieName);
 }

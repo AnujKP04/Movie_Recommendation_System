@@ -6,11 +6,24 @@ import java.util.*;
 import com.app.model.MovieModel;
 
 public class Admin {
-
+	
+	static void showMovieList()
+	{
+		AdminServices adminService = new AdminServicesImpl();
+		int count = 1;
+		List<MovieModel> movieData = new ArrayList<>(adminService.getAllMovies());
+		if (!movieData.isEmpty()) {
+			System.out.println("\n  ***** All Movies List *****\n");
+			for (MovieModel model : movieData) {
+				System.out.println("\t" + count++ + ".  " + model.getMovieName());
+			}
+		}
+	}
 	public static void AdminFunctinality() {
 		Scanner sc = ScannerClass.getScanner();
 		MovieModel model;
 		AdminServices adminService = new AdminServicesImpl();
+		UserServices userService = new UserServicesImpl();
 		String choice;
 		do {
 			System.out.println("1:Movie Section\n2:User Section\n3:Profile\n4:Logout\nEnter your choice");
@@ -21,8 +34,8 @@ public class Admin {
 			case "1":
 				do {
 					System.out.println(
-							"1:Add movie\n2:View all movies\n3:Search movie\n4:Delete movie\n5:Update movie\n6:Exit"
-									+ "\n\nEnter your choice");
+							"\n1:Add movie\n2:View all movies\n3:Search movie\n4:Delete movie\n5:Retrive deleted movie\n6:Update movie"
+									+ "\n7:Logout\n\nEnter your choice");
 					adminChoice = sc.nextLine();
 
 					switch (adminChoice) {
@@ -31,8 +44,20 @@ public class Admin {
 						String movieName = sc.nextLine();
 						System.out.println("Enter movie duration");
 						String duration = sc.nextLine();
-						System.out.println("Enter movie genres  (press 0 to finish) ");
+						int count = 0;
+						Map<String,Integer> allGenre = new LinkedHashMap<>(userService.getAllGenres());
+						System.out.println("\n***** All Genre List *****\n");
+						
+						for(Map.Entry<String, Integer> map : allGenre.entrySet())
+						{
+							if(count%5==0)
+								System.out.println();
+							System.out.print("\t"+ ++count +".  "+map.getKey());
+							
+						}
+						System.out.println("\n\nEnter movie genres  (press 0 to finish) ");
 						Set<String> genres = new HashSet<>();
+						
 						while (true) {
 							String genre = sc.nextLine();
 							if (genre.equals("0")) {
@@ -121,6 +146,7 @@ public class Admin {
 						break;
 
 					case "4":
+						showMovieList();
 						System.out.println("\nEnter movie name ");
 						movieName = sc.nextLine();
 						String movieYear = "";
@@ -163,13 +189,35 @@ public class Admin {
 						}
 
 						break;
-
+						
 					case "5":
-						UpdateMovie.updateMovie();
+						List<String> blockedMovieList = new ArrayList<>(adminService.getBlockedMovie());
+						if(!blockedMovieList.isEmpty()) {
+							System.out.println("\n***** All Blocked Movies *****\n");
+							System.out.println("\tID  Movie name\n");
+							count = 1;
+							for(String movies :blockedMovieList) {
+								System.out.println("\t"+count++ +". "+ movies);
+							}
+							System.out.println("\nEnter movie name to retrive (Press 0 to exit) ");
+							movieName = sc.nextLine();
+							if(!movieName.equals("0")) {
+								System.out.println(adminService.isUnblockMovie(movieName)?"\n***** " + movieName + 
+										" movie retrive successfully  *****\n":"\n===== !!! Failed to retrive !!! =====\n");
+							}
+						}
+						else {
+							System.out.println("\n===== !!! Movie Blacklist is Empty !!! =====\n");
+						}
+						
 						break;
 
 					case "6":
-						System.out.println("Return to main page......\n");
+						UpdateMovie.updateMovie();
+						break;
+
+					case "7":
+						System.out.println("Logged out...\n");
 						break;
 
 					default:
@@ -177,7 +225,7 @@ public class Admin {
 						break;
 					}
 
-				} while (!adminChoice.equals("6"));
+				} while (!adminChoice.equals("7"));
 				break;
 
 			case "2":

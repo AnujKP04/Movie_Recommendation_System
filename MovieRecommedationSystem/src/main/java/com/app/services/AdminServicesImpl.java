@@ -109,4 +109,14 @@ public class AdminServicesImpl implements AdminServices {
 		// TODO Auto-generated method stub
 		return movieRepo.isUpdateMovie(movieName, newMovieData, movieDataType);
 	}
+	@Override
+	public List<String> getBlockedMovie() {
+		// TODO Auto-generated method stub
+		return adminRepo.getBlockedMovie();
+	}
+	@Override
+	public boolean isUnblockMovie(String MovieName) {
+		// TODO Auto-generated method stub
+		return adminRepo.isUnblockMovie(MovieName);
+	}
 }

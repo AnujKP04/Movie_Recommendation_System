@@ -38,5 +38,7 @@ public interface UserServices {
 	
 	public boolean isUpadatePassword(String newPass, String userName);
 	
+	public Map<String,Integer> getAllGenres();
+	
 	public Map<String, Double> recommendedMovie(String username);
 }

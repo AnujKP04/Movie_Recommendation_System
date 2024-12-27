@@ -19,8 +19,10 @@ public class MovieRecommendationSystem {
 		String args[]= {};
 		main(args);
 	}
+	
 	public static void main(String[] args) {
 
+		System.out.println("\n\n\n\t\t\t\t\t\t𝙈𝙤𝙫𝙞𝙚 𝙍𝙚𝙘𝙤𝙢𝙢𝙚𝙣𝙙𝙖𝙩𝙞𝙤𝙣 𝙎𝙮𝙨𝙩𝙚𝙢 \n\n\n");
 		UserModel userModel;
 		AdminServices adminService = new AdminServicesImpl();
 		Scanner sc = ScannerClass.getScanner();

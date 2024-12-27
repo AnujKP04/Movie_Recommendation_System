@@ -11,6 +11,36 @@ import com.app.services.*;
 
 public class SearchMovie {
 
+	static Scanner sc = ScannerClass.getScanner();
+	
+	static void watchMovieHelper(List<MovieModel> movieData)
+	{ 
+		AdminServices adminService = new AdminServicesImpl();
+		int count = 1;
+		if (!movieData.isEmpty()) {
+			System.out.println("\n  ***** All Movies List *****\n");
+			for (MovieModel mModel : movieData) {
+				System.out.println("\t" + count++ + ".  " + mModel.getMovieName());
+			}
+
+			while(true) {
+				System.out.println("\nEnter movie name (Press 0 to exit) ");
+				String movieName = sc.nextLine();
+				if(movieName.equals("0"))
+				{
+					break;
+				}
+				movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
+				SearchMovie.displayMovieHelper(movieData);
+				if(!movieData.isEmpty())
+				MovieOptions.movieOptions(movieName); 
+			}
+			
+		} else {
+			System.out.println("\n===== !!! No Movie Available !!! =====\n");
+		}
+	}
+	
 	static void displayMovieHelper(List<MovieModel> movieData)
 	{
 		Set<String> genre = new HashSet<>();
@@ -39,7 +69,6 @@ public class SearchMovie {
 	}
 	static void movieSearchOperation() {
 		String searchChoice;
-		Scanner sc = ScannerClass.getScanner();
 		MovieModel model ;
 		AdminServices adminService = new AdminServicesImpl();
 		do {
@@ -58,7 +87,10 @@ public class SearchMovie {
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName,"movieName"));
 					displayMovieHelper(movieData);
-					MovieOptions.movieOptions(movieName);
+					if(!movieData.isEmpty())
+					{
+						MovieOptions.movieOptions(movieName);
+					}
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Name !!! =====\n");
@@ -67,11 +99,11 @@ public class SearchMovie {
 
 			case "2":
 				System.out.println("\nEnter movie genre ");
-				String genre = sc.nextLine();
-				if(genre.matches(regex))
+				String genreName = sc.nextLine();
+				if(genreName.matches(regex))
 				{
-					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(genre,"movieGenre"));
-					displayMovieHelper(movieData);
+					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(genreName,"movieGenre"));
+					watchMovieHelper(movieData);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Genre Name !!! =====\n");
@@ -84,7 +116,7 @@ public class SearchMovie {
 				if(movieYear.matches("[0-9]{4}"))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(movieYear,"movieYear"));
-					displayMovieHelper(movieData);
+					watchMovieHelper(movieData);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Year !!! =====\n");
@@ -97,7 +129,7 @@ public class SearchMovie {
 				if(director.matches(regex))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(director,"director"));
-					displayMovieHelper(movieData);
+					watchMovieHelper(movieData);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Director Name !!! =====\n");
@@ -110,7 +142,7 @@ public class SearchMovie {
 				if(actor.matches(regex))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(actor,"actor"));
-					displayMovieHelper(movieData);
+					watchMovieHelper(movieData);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Actor Name !!! =====\n");
@@ -123,7 +155,7 @@ public class SearchMovie {
 				if(actress.matches(regex))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(actress,"actress"));
-					displayMovieHelper(movieData);
+					watchMovieHelper(movieData);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Actress Name !!! =====\n");

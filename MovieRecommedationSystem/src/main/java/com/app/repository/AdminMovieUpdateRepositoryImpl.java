@@ -29,10 +29,10 @@ public class AdminMovieUpdateRepositoryImpl extends DBConnection implements Admi
 	
 		case "movieYear":
 			/*
-			 *  create procedure updatemovieyear(movieyear varchar(4),moviename varchar(100)) begin 
-			 *  insert ignore into movieyear(releaseyear) values(movieyear);  
-			 *  update movies set yearid = (select yearid from movieyear where releaseyear = movieyear) 
-			 *  where moviename= moviename; end//
+			 *  create procedure updatemovieyear(myear varchar(4),mname varchar(100)) begin 
+			 *  insert ignore into movieyear(releaseyear) values(myear);  
+			 *  update movies set yearid = (select yearid from movieyear where releaseyear = myear) 
+			 *  where moviename= mname; end//
 			 */
 			
 			try {

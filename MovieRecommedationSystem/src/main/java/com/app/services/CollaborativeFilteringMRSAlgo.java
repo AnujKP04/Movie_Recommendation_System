@@ -24,6 +24,7 @@ public class CollaborativeFilteringMRSAlgo {
 
 		UserRepository userRepo = new UserRepositoryImpl();
 		AdminRepository adminRepo = new AdminRepositoryImpl();
+		
 		Map<String, Integer> genres = new LinkedHashMap<>(userRepo.getAllGenres());
 		Map<String, Integer> genresDuplicate = new LinkedHashMap<>(genres);
 		Map<String, Double> movieRecommended = new LinkedHashMap<>();// final probability value with moviename
