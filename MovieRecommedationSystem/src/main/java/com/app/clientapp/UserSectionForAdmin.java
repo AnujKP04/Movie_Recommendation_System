@@ -19,7 +19,7 @@ public class UserSectionForAdmin {
 		
 		for(UserModel model : userData) {
 			System.out.println(count++ +"  "+model.getName()+"\t"+model.getContact()+"\t"+model.getDate()+
-					"\t"+model.getEmail()+"\t\t"+model.getUsername());
+					"\t"+model.getEmail()+"\t"+model.getUsername());
 		}
 	}
 	
