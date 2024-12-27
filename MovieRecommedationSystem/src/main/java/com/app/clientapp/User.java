@@ -74,9 +74,10 @@ public class User {
 			case "1":
 				displayMoviesList();
 				break;
+				
 			case "2":
 				List<MovieModel>movieData = new ArrayList<>(userServices.getTrendingMovies());
-
+			
 				int count = 1;
 				System.out.println("\n***** Top 10 Trending Movies *****\n");
 				for (MovieModel m : movieData) {

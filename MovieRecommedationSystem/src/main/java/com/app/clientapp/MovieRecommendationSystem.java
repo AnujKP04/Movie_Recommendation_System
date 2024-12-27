@@ -78,7 +78,7 @@ public class MovieRecommendationSystem {
 					{
 						System.out.println("!!! Session Terminated !!!");
 						
-						System.exit(0);
+						MovieRecommendationSystem.callMain();
 					}
 				}
 				
@@ -91,7 +91,7 @@ public class MovieRecommendationSystem {
 					if(contact.equals("0"))
 					{
 						System.out.println("!!! Session Terminated !!!");
-						System.exit(0);
+						MovieRecommendationSystem.callMain();
 					}
 				}
 				System.out.println("\nEnter your username");
@@ -103,7 +103,7 @@ public class MovieRecommendationSystem {
 					if(username.equals("0"))
 					{
 						System.out.println("!!! Session Terminated !!!");
-						System.exit(0);
+						MovieRecommendationSystem.callMain();
 					}
 				}
 				System.out.println("\nEnter your password (must between 6-16 letters)");
@@ -151,8 +151,8 @@ public class MovieRecommendationSystem {
 
 						case "2":
 							userModel = new UserModel(name,email,contact,username,password,"","User");
-							System.out.println(adminService.isRegister(userModel)?"User Registered Successfully":
-									"User Registeration Failed");
+							System.out.println(adminService.isRegister(userModel)?"\n***** "+name+" You Are Registered Successfully *****\n":
+								"\n===== !!! Registretion Falied !!! =====\n");
 							break;
 
 						default:
@@ -165,7 +165,7 @@ public class MovieRecommendationSystem {
 				break;
 
 			case "3":
-				System.out.println("Exit");
+				System.out.println("\n***** Session Terminated *****\n");
 				System.exit(0);
 
 			default:

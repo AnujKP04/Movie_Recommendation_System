@@ -35,7 +35,7 @@ public class Admin {
 				do {
 					System.out.println(
 							"\n1:Add movie\n2:View all movies\n3:Search movie\n4:Delete movie\n5:Retrive deleted movie\n6:Update movie"
-									+ "\n7:Logout\n\nEnter your choice");
+									+ "\n7:Previous menu\n8:Logout\n\nEnter your choice");
 					adminChoice = sc.nextLine();
 
 					switch (adminChoice) {
@@ -88,6 +88,7 @@ public class Admin {
 
 						System.out.println("Enter movie year");
 						String year = sc.nextLine();
+						int varifyYear = Integer.parseInt(year);
 						System.out.println("Enter IMDb rating");
 						String rating = sc.nextLine();
 						System.out.println("Enter movie director name");
@@ -99,7 +100,7 @@ public class Admin {
 						System.out.println("Enter movie description of movie");
 						String description = sc.nextLine();
 
-						if (movieName.matches(regex) && duration.matches(regex) && year.matches("[0-9]+")) {
+						if (movieName.matches(regex) && duration.matches(regex) && year.matches("[0-9]+") && varifyYear<=2024) {
 							model = new MovieModel(movieName, duration, genres, languages, year, director, acter,
 									actress, description, rating);
 
@@ -217,7 +218,11 @@ public class Admin {
 						break;
 
 					case "7":
-						System.out.println("Logged out...\n");
+						System.out.println("Return to main menu...\n");
+						break;
+						
+					case "8":
+						MovieRecommendationSystem.callMain();
 						break;
 
 					default:

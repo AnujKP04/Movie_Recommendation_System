@@ -23,7 +23,6 @@ public class UserRepositoryImpl extends DBConnection implements UserRepository {
 				+ "and m.moviestatus = 1 order by m.rating desc limit 10;";
 
 		List<MovieModel> movieData = adminRepoImplObj.getAllMoviesHelper(trendingMovieQuery);
-
 		return movieData;
 	}
 
