@@ -22,7 +22,7 @@ public class MovieRecommendationSystem {
 	
 	public static void main(String[] args) {
 
-		System.out.println("\n\n\n\t\t\t\t\t\t𝙈𝙤𝙫𝙞𝙚 𝙍𝙚𝙘𝙤𝙢𝙢𝙚𝙣𝙙𝙖𝙩𝙞𝙤𝙣 𝙎𝙮𝙨𝙩𝙚𝙢 \n\n\n");
+		System.out.println("\n\n\n\t\t\t\t\t\t 𝙈𝙤𝙫𝙞𝙚 𝙍𝙚𝙘𝙤𝙢𝙢𝙚𝙣𝙙𝙖𝙩𝙞𝙤𝙣 𝙎𝙮𝙨𝙩𝙚𝙢 \n\n\n");
 		UserModel userModel;
 		AdminServices adminService = new AdminServicesImpl();
 		Scanner sc = ScannerClass.getScanner();
