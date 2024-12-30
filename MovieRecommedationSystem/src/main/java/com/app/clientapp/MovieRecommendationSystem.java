@@ -36,6 +36,9 @@ public class MovieRecommendationSystem {
 
         do {
             logger.info("Prompting user for action");
+            System.out.println("--------------------------------");
+			System.out.println("=======    Login Page    =======");
+			System.out.println("--------------------------------");
             System.out.println("1:Login \n2:Register\n3:Exit\nEnter your choice");
             choice = sc.nextLine();
 
@@ -74,7 +77,9 @@ public class MovieRecommendationSystem {
 
                 case "2":
                     logger.info("Registration option selected");
-
+                    System.out.println("------------------------------");
+        			System.out.println("=======  Registration  =======");
+        			System.out.println("------------------------------");
                     String userChoice;
                     String rePassword;
                     System.out.println("1:Admin Registration\n2:User Registration\n\nEnter your choice");
@@ -91,7 +96,7 @@ public class MovieRecommendationSystem {
 
                     while ((adminService.getUserEmail()).contains(email)) {
                         logger.warn("Email already registered: {}", email);
-                        System.out.println("Email already registered use another (For exit press 0)");
+                        System.out.println("Email already registered use another (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽)");
                         email = sc.nextLine();
                         if (email.equals("0")) {
                             logger.info("Registration terminated by user.");
@@ -106,7 +111,7 @@ public class MovieRecommendationSystem {
                     logger.debug("Contact entered: {}", contact);
                     while ((adminService.getUserContact()).contains(contact)) {
                         logger.warn("Contact already registered: {}", contact);
-                        System.out.println("Contact already registered use another (For exit press 0)");
+                        System.out.println("Contact already registered use another (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽)");
                         contact = sc.nextLine();
                         if (contact.equals("0")) {
                             logger.info("Registration terminated by user.");
@@ -120,7 +125,7 @@ public class MovieRecommendationSystem {
                     logger.debug("Username entered: {}", username);
                     while ((adminService.getUsername()).contains(username)) {
                         logger.warn("Username already taken: {}", username);
-                        System.out.println("Username is unavailable use another (For exit press 0)");
+                        System.out.println("Username is unavailable use another (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽)");
                         username = sc.nextLine();
                         if (username.equals("0")) {
                             logger.info("Registration terminated by user.");
@@ -138,7 +143,7 @@ public class MovieRecommendationSystem {
                             && (password.length() > 5 && password.length() < 17)) {
                         boolean flag = false;
                         while (true) {
-                            System.out.println("\nRe-enter your password (press 0 to exit)");
+                            System.out.println("\nRe-enter your password (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽)");
                             rePassword = sc.nextLine();
                             if (password.equals(rePassword)) {
                                 flag = true;
@@ -174,7 +179,8 @@ public class MovieRecommendationSystem {
 
                                 case "2":
                                     userModel = new UserModel(name, email, contact, username, password, "", "User");
-                                    System.out.println(adminService.isRegister(userModel) ? "\n***** " + name + " You Are Registered Successfully *****\n" : "\n===== !!! Registration Failed !!! =====\n");
+                                    System.out.println(adminService.isRegister(userModel) ? "\n***** " + name + " You Are Registered Successfully *****\n" 
+                                    		: "\n===== !!! Registration Failed !!! =====\n");
                                     break;
 
                                 default:

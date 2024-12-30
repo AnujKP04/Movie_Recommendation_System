@@ -127,7 +127,7 @@ public class UserRepositoryImpl extends DBConnection implements UserRepository {
 
 			int result = pstmt.executeUpdate();
 
-			return result == 1 ? true : false;
+			return result >= 1 ? true : false;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

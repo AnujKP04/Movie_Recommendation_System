@@ -9,7 +9,7 @@ import com.app.model.MovieModel;
 public class Admin {
 
     // Instantiate the logger
-    private static final Logger logger = Logger.getLogger(Admin.class.getName());
+   // private static final Logger logger = Logger.getLogger(Admin.class.getName());
 
     static void showMovieList() {
         AdminServices adminService = new AdminServicesImpl();
@@ -30,6 +30,9 @@ public class Admin {
         UserServices userService = new UserServicesImpl();
         String choice;
         do {
+        	System.out.println("------------------------------");
+			System.out.println("=======   Admin View   =======");
+			System.out.println("------------------------------");
             System.out.println("1:Movie Section\n2:User Section\n3:Profile\n4:Logout\nEnter your choice");
             choice = sc.nextLine();
             String adminChoice;
@@ -37,6 +40,9 @@ public class Admin {
             switch (choice) {
             case "1":
                 do {
+                	System.out.println("-------------------------------");
+        			System.out.println("=======  Movie Section  =======");
+        			System.out.println("-------------------------------");
                     System.out.println(
                             "\n1:Add movie\n2:View all movies\n3:Search movie\n4:Delete movie\n5:Retrive deleted movie\n6:Update movie"
                                     + "\n7:Previous menu\n8:Logout\n\nEnter your choice");
@@ -58,7 +64,7 @@ public class Admin {
                             }
                             System.out.print("\t" + ++count + ".  " + map.getKey());
                         }
-                        System.out.println("\n\nEnter movie genres  (press 0 to finish) ");
+                        System.out.println("\n\nEnter movie genres  (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽) ");
                         Set<String> genres = new HashSet<>();
                         
                         while (true) {
@@ -74,7 +80,7 @@ public class Admin {
                             }
                         }
 
-                        System.out.println("Enter movie languages  (press 0 to finish) ");
+                        System.out.println("Enter movie languages  (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽) ");
                         Set<String> languages = new HashSet<>();
                         while (true) {
                             String language = sc.nextLine();
@@ -109,10 +115,10 @@ public class Admin {
 
                             if (adminService.isAddMovie(model)) {
                                 System.out.println("\n***** " + movieName + " movie is added successfully *****\n");
-                                logger.info("Movie added: " + movieName);
+                               // logger.info("Movie added: " + movieName);
                             } else {
                                 System.out.println("===== !!! Movie is not added !!! =====");
-                                logger.warning("Failed to add movie: " + movieName);
+                                //logger.warning("Failed to add movie: " + movieName);
                             }
                         } else {
                             System.out.println("\n===== !!! Invalid Movie Input !!! =====\n");
@@ -150,13 +156,15 @@ public class Admin {
                         break;
 
                     case "3":
-                        SearchMovie.movieSearchOperation();
+                        SearchMovie.movieSearchOperation("admin");
                         break;
 
                     case "4":
                         showMovieList();
-                        System.out.println("\nEnter movie name ");
+                        System.out.println("\nEnter movie name (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽)");
                         movieName = sc.nextLine();
+                        if(movieName.equals("0"))
+                        	break;
                         String movieYear = "";
                         boolean flag = false;
                         if (movieName.matches(regex)) {
@@ -169,10 +177,10 @@ public class Admin {
                                     if (movieYear.matches("[0-9]{4}")) {
                                         if (adminService.isDeleteMovie(movieName, movieYear)) {
                                             System.out.println("***** " + movieName + " is deleted successfully *****\n");
-                                            logger.info("Movie deleted: " + movieName + " (" + movieYear + ")");
+                                            //logger.info("Movie deleted: " + movieName + " (" + movieYear + ")");
                                         } else {
                                             System.out.println("===== !!! Failed to delete !!! =====\n");
-                                            logger.warning("Failed to delete movie: " + movieName);
+                                            //logger.warning("Failed to delete movie: " + movieName);
                                         }
                                     } else {
                                         System.out.println("\n===== !!! Invalid Movie Year !!! =====\n");
@@ -188,10 +196,10 @@ public class Admin {
                                     if (flag) {
                                         if (adminService.isDeleteMovie(movieName, movieYear)) {
                                             System.out.println("***** " + movieName + " movie is deleted successfully *****\n");
-                                            logger.info("Movie deleted: " + movieName + " (" + movieYear + ")");
+                                            //logger.info("Movie deleted: " + movieName + " (" + movieYear + ")");
                                         } else {
                                             System.out.println("\n===== !!! Failed  !!! =====\n");
-                                            logger.warning("Failed to delete movie: " + movieName);
+                                            //logger.warning("Failed to delete movie: " + movieName);
                                         }
                                     }
                                 }
@@ -212,15 +220,15 @@ public class Admin {
                             for (String movies : blockedMovieList) {
                                 System.out.println("\t" + count++ + ". " + movies);
                             }
-                            System.out.println("\nEnter movie name to retrieve (Press 0 to exit) ");
+                            System.out.println("\nEnter movie name to retrieve (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽) ");
                             movieName = sc.nextLine();
                             if (!movieName.equals("0")) {
                                 if (adminService.isUnblockMovie(movieName)) {
                                     System.out.println("\n***** " + movieName + " movie retrieved successfully *****\n");
-                                    logger.info("Movie unblocked: " + movieName);
+                                    //logger.info("Movie unblocked: " + movieName);
                                 } else {
                                     System.out.println("\n===== !!! Failed to retrieve !!! =====\n");
-                                    logger.warning("Failed to unblock movie: " + movieName);
+                                    //logger.warning("Failed to unblock movie: " + movieName);
                                 }
                             }
                         } else {
@@ -242,7 +250,7 @@ public class Admin {
 
                     default:
                         System.out.println("\n===== !!! Invalid Input !!! =====\n");
-                        logger.warning("Invalid input in movie section");
+                        //logger.warning("Invalid input in movie section");
                         break;
                     }
 
@@ -263,7 +271,7 @@ public class Admin {
 
             default:
                 System.out.println("\n===== !!! Invalid Input !!! =====\n");
-                logger.warning("Invalid input in admin section");
+                //logger.warning("Invalid input in admin section");
                 break;
             }
         } while (!choice.equals("4"));

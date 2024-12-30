@@ -32,13 +32,23 @@ public class MovieOptions {
 				break;
 				
 			case "3":
-				System.out.println("Enter rating for "+movieName+" out of 10\n");
-				String rating = sc.nextLine();
-				double userRating = Double.parseDouble(rating);
-				if(userRating<=10 && userRating >0)
-				System.out.println(userServices.hasMovieRated(userName, movieName, rating)?"\n***** Thank You For Rating :) *****\n":
-					"\n===== !!! Oops! Something went wrong :( !!! or You not yet watched movie =====\n");
-				break;
+				try {
+					System.out.println("Enter rating for \" "+movieName+" \" movie out of 10");
+					String rating = sc.nextLine();
+					double userRating = Double.parseDouble(rating);
+					if(userRating<=10 && userRating >0)
+					System.out.println(userServices.hasMovieRated(userName, movieName, rating)?"\n***** Thank You For Rating :) *****\n":
+						"\n===== !!! Oops! Something went wrong :( !!! or You not yet watched movie =====\n");
+					else {
+						System.out.println("\n=====!!! Rating should be out of 10 !!!=====\n");
+					}
+					break;
+				}
+				catch(Exception e)
+				{
+					System.out.println("\n=====!!! Rating should be out of 10 !!!=====\n");
+				}
+					
 				
 			case "4":
 				System.out.println("Return to user section");

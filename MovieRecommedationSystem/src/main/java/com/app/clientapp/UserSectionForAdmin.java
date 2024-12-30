@@ -29,6 +29,9 @@ public class UserSectionForAdmin {
 		AdminServices adminService = new AdminServicesImpl();
 		String choice="";		
 		do {
+			System.out.println("------------------------------");
+			System.out.println("=======  User Section  =======");
+			System.out.println("------------------------------");
 			System.out.println("\n1:Show All Users\n2:Block User\n3:Unblock User\n4:Exit\n5:Logout");
 			choice = sc.nextLine();
 			

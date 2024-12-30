@@ -43,7 +43,7 @@ public class User {
 			}
 
 			while(true) {
-				System.out.println("\nEnter movie name (Press 0 to exit) ");
+				System.out.println("\nEnter movie name (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽) ");
 				movieName = sc.nextLine();
 				if(movieName.equals("0"))
 				{
@@ -65,9 +65,12 @@ public class User {
 		AdminServices adminService = new AdminServicesImpl();
 		String userChoice = null;
 		do {
+			System.out.println("-------------------------------");
+			System.out.println("=======    User View    =======");
+			System.out.println("-------------------------------");
 			System.out.println(
 					"\n1: Show All Movies\n2: Trending Movies\n3: Your Interest\n4: Search Movie\n5: User History\n6: Watchlist"
-							+ "\n7: Profile\n8: Exit\nEnter your choice");
+							+ "\n7: Profile\n8: Logout\nEnter your choice");
 			userChoice = sc.nextLine();
 
 			switch (userChoice) {
@@ -81,7 +84,7 @@ public class User {
 				int count = 1;
 				System.out.println("\n***** Top 10 Trending Movies *****\n");
 				for (MovieModel m : movieData) {
-					System.out.println(count++ + ". " + m.getMovieName());
+					System.out.println("\t"+count++ + ". " + m.getMovieName());
 				}
 
 				System.out.println("___________________________________");
@@ -90,7 +93,7 @@ public class User {
 				boolean flag = false;
 				List<MovieModel> selectedMovieData = new ArrayList<>();
 				while (true) {
-					System.out.println("\nEnter name of movie from trending list: (press 0 for exit)");
+					System.out.println("\nEnter name of movie from trending list: (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽)");
 					movieName = sc.nextLine();
 
 					if (movieName.equals("0"))
@@ -145,7 +148,7 @@ public class User {
 
 				while (true) {
 
-					System.out.println("\nEnter movie name (press 0 for exit)");
+					System.out.println("\nEnter movie name (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽)");
 					movieName = sc.nextLine();
 					if (movieName.equals("0")) {
 						break;
@@ -159,7 +162,7 @@ public class User {
 				break;
 
 			case "4":
-				SearchMovie.movieSearchOperation();
+				SearchMovie.movieSearchOperation("user");
 				break;
 
 			case "5":

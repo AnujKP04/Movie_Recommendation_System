@@ -13,7 +13,7 @@ public class SearchMovie {
 
 	static Scanner sc = ScannerClass.getScanner();
 	
-	static void watchMovieHelper(List<MovieModel> movieData)
+	static void watchMovieHelper(List<MovieModel> movieData, String userType)
 	{ 
 		AdminServices adminService = new AdminServicesImpl();
 		int count = 1;
@@ -24,7 +24,7 @@ public class SearchMovie {
 			}
 
 			while(true) {
-				System.out.println("\nEnter movie name (Press 0 to exit) ");
+				System.out.println("\nEnter movie name (𝓟𝓻𝓮𝓼𝓼 0 𝓯𝓸𝓻 𝓔𝔁𝓲𝓽) ");
 				String movieName = sc.nextLine();
 				if(movieName.equals("0"))
 				{
@@ -32,7 +32,7 @@ public class SearchMovie {
 				}
 				movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName, "movieName"));
 				SearchMovie.displayMovieHelper(movieData);
-				if(!movieData.isEmpty())
+				if(!movieData.isEmpty() && userType.equalsIgnoreCase("user"))
 				MovieOptions.movieOptions(movieName); 
 			}
 			
@@ -67,15 +67,17 @@ public class SearchMovie {
 		} else
 			System.out.println("\n===== !!! No Movie Available !!! =====\n");
 	}
-	static void movieSearchOperation() {
+	static void movieSearchOperation(String userType) {
 		String searchChoice;
 		MovieModel model ;
 		AdminServices adminService = new AdminServicesImpl();
 		do {
-
+			System.out.println("--------------------------------");
+			System.out.println("====== Search Your Movies ======");
+			System.out.println("--------------------------------");
 			System.out.println(
-					"1:Search Movie by Name\n2:Search Movie by Genre\n3:Search Movie by Year\n4:Search Movie by Director\n"
-					+ "5:Search Movie by Actor\n6:Search Movie by Actress\n7:Exit\n8:Logout\n\nEnter your choice");
+					"\n1:Search Movie by Name\n2:Search Movie by Genre\n3:Search Movie by Year\n4:Search Movie by Director\n"
+					+ "5:Search Movie by Actor\n6:Search Movie by Actress\n7:Previous Menu\n8:Logout\n\nEnter your choice");
 			searchChoice = sc.nextLine();
 			String regex = "[A-Za-z 0-9-]+";
 
@@ -87,7 +89,7 @@ public class SearchMovie {
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(movieName,"movieName"));
 					displayMovieHelper(movieData);
-					if(!movieData.isEmpty())
+					if(!movieData.isEmpty() && userType.equalsIgnoreCase("user"))
 					{
 						MovieOptions.movieOptions(movieName);
 					}
@@ -103,7 +105,7 @@ public class SearchMovie {
 				if(genreName.matches(regex))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(genreName,"movieGenre"));
-					watchMovieHelper(movieData);
+					watchMovieHelper(movieData,userType);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Genre Name !!! =====\n");
@@ -116,7 +118,7 @@ public class SearchMovie {
 				if(movieYear.matches("[0-9]{4}"))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(movieYear,"movieYear"));
-					watchMovieHelper(movieData);
+					watchMovieHelper(movieData,userType);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Year !!! =====\n");
@@ -129,7 +131,7 @@ public class SearchMovie {
 				if(director.matches(regex))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(director,"director"));
-					watchMovieHelper(movieData);
+					watchMovieHelper(movieData,userType);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Director Name !!! =====\n");
@@ -142,7 +144,7 @@ public class SearchMovie {
 				if(actor.matches(regex))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(actor,"actor"));
-					watchMovieHelper(movieData);
+					watchMovieHelper(movieData,userType);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Actor Name !!! =====\n");
@@ -155,7 +157,7 @@ public class SearchMovie {
 				if(actress.matches(regex))
 				{
 					List<MovieModel> movieData = new ArrayList<>(adminService.getMoviesBySearch(actress,"actress"));
-					watchMovieHelper(movieData);
+					watchMovieHelper(movieData,userType);
 				}
 				else {
 					System.out.println("\n===== !!! Invalid Movie Actress Name !!! =====\n");
