@@ -36,9 +36,9 @@ public class MovieRecommendationSystem {
 
         do {
             logger.info("Prompting user for action");
-            System.out.println("--------------------------------");
-			System.out.println("=======    Login Page    =======");
-			System.out.println("--------------------------------");
+            System.out.println("----------------------------------");
+			System.out.println("========    Login Page    ========");
+			System.out.println("----------------------------------");
             System.out.println("1:Login \n2:Register\n3:Exit\nEnter your choice");
             choice = sc.nextLine();
 
